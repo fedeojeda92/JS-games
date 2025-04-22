@@ -1,0 +1,112 @@
+body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(to bottom, #d4fc79, #96e6a1);
+    text-align: center;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+}
+
+h3 {
+    font-size: 1.5rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+#start-pause-button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ffdd57;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px #c7a800;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+#start-pause-button:hover {
+    background-color: #ffe684;
+    box-shadow: 0 4px #b89f00;
+    transform: scale(1.05);
+}
+
+.grid {
+    margin: 20px auto;
+    border: 5px solid #333;
+    background-color: #ffffff;
+    height: 540px;
+    width: 540px;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0 0 20px rgba(0,0,0,0.4);
+    border-radius: 15px;
+}
+
+.grid div {
+    height: 60px;
+    width: 60px;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease;
+}
+
+.ending-block {
+    background: radial-gradient(circle, #ff4e50, #f9d423);
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px #aa0000;
+}
+
+.starting-block {
+    background: radial-gradient(circle, #2193b0, #6dd5ed);
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px #004466;
+}
+
+.l1 {
+    background: repeating-linear-gradient(
+        45deg,
+        #8B4513,
+        #8B4513 10px,
+        #A0522D 10px,
+        #A0522D 20px
+    );
+}
+.l2 {
+    background-color: #a0522d;
+}
+.l3 {
+    background-color: #cd853f;
+}
+.l4, 
+.l5 {
+    background: linear-gradient(to right, #87cefa, #00bfff);
+    animation: waterFlow 1s infinite linear;
+}
+
+@keyframes waterFlow {
+    0% { background-position: 0 0; }
+    100% { background-position: 60px 0; }
+}
+
+.c1 {
+    background: #000;
+    box-shadow: 0 0 10px #fff;
+}
+.c2 {
+    background: #888;
+}
+.c3 {
+    background: #bbb;
+}
+
+.frog {
+    background: radial-gradient(circle, #00ff00, #006400);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ff00;
+    animation: jump 0.5s ease;
+}
+
+@keyframes jump {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+}
