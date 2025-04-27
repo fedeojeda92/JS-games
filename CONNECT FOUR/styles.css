@@ -1,9 +1,30 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0f1b, #1a1a2e);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    color: #00ffe1;
+}
+
 .grid {
     border: 1px solid;
-    height: 120px;
-    width: 140px;
+    border-radius: 10px;
+    height: 140px;
+    width: 280px;
+    background-color: #222;
     display: flex;
     flex-wrap: wrap;
+    box-shadow: 0 0 35px #00ffe1, inset 0 0 5px #00ffe1;
+}
+
+h3 {
+    margin: 10px;
+    font-size: 24px;
+    text-shadow: 0 0 5px #00ffe1, 0 0 10px #00ffe1;
 }
 
 .grid div {
@@ -12,11 +33,13 @@
 }
 
 .player-one {
-    background-color: red;
+    background-color: #ff00ff;
     border-radius: 10px;
+    box-shadow: 0 0 5px #ff00ff, 0 0 5px #ff00ff;
 }
 
 .player-two {
-    background-color: black;
+    background-color: #00ffff; /* cian neon */
     border-radius: 10px;
+    box-shadow: 0 0 5px #00ffff, 0 0 5px #00ffff;
 }
