@@ -1,7 +1,13 @@
 const grid = document.querySelector('.grid')
+const resultsDisplay = document.querySelector('#results')
 
 let currentShooterIndex = 202
 let width = 15
+let direction = 1
+let invadersID 
+let goingRight = true
+let aliensRemoved = []
+let results = 0
 
 for (let i = 0 ; i < 225 ; i++) {
     const square = document.createElement('div')
@@ -18,8 +24,10 @@ const alienInvaders = [
 
 function draw () {
     for (let i = 0; i < alienInvaders.length; i++) {
-        squares[alienInvaders[i]].classList.add('invader')
-        
+        //dibujar todo pero teniendo en cuenta cada vez que se carga que no esten los eliminados por el laser
+        if (!aliensRemoved.includes(i)) {
+            squares[alienInvaders[i]].classList.add('invader')    
+        } 
     }
 }
 
@@ -59,16 +67,85 @@ function moveInvaders () {
     const leftEdge = alienInvaders[0] % width === 0
     const righEdge = alienInvaders[alienInvaders.length - 1] % width === width - 1
     remove()
+
+    if (righEdge && goingRight) {
+        for (let i = 0; i < alienInvaders.length; i++) {
+            alienInvaders[i] += width +1
+            direction = -1
+            goingRight = false
+            }
+        }
+    if (leftEdge && !goingRight) {
+        for (let i = 0; i < alienInvaders.length; i++) {
+            alienInvaders[i] += width -1 
+            direction = 1
+            goingRight = true
+            }
+        }
+
     for (let i = 0; i < alienInvaders.length; i++) {
-        alienInvaders[i] += 1
+        alienInvaders[i] += direction
     }
     draw()
+
+
+    // si toca al shooter pierde
+    if (squares[currentShooterIndex].classList.contains('invader', 'shooter')) {
+        resultsDisplay.innerHTML = "GAME OVER"
+        clearInterval(invadersID)
+    }
+
+    // si toca el piso pierde
+    for (let i = 0; i < alienInvaders.length; i++) {
+        if (alienInvaders[i] > squares.length) {
+            resultsDisplay.innerHTML = 'GAME OVER'
+            clearInterval(invadersID)
+        }
+    }
+    //si no queda ningun bicho gana
+    if (aliensRemoved.length === alienInvaders.length) {
+        resultsDisplay.innerHTML = 'YOU WIN'
+        clearInterval(invadersID)
+    }
 }
 
-setInterval(moveInvaders, 500)
+invadersID = setInterval(moveInvaders, 5000)
 
+// dispararle a los bichos
+function shoot(e) {
+    let laserId
+    let currentLaserIndex = currentShooterIndex
+    //mover el tiro para arriba restandole de a una fila
+    function moveLaser() {
+        squares[currentLaserIndex].classList.remove('laser')
+        currentLaserIndex -= width
+        squares[currentLaserIndex].classList.add('laser')
+        //cuando le pega al bicho borro el bicho, el laser y agrego un boom
+        if (squares[currentLaserIndex].classList.contains('invader')) {
+            squares[currentLaserIndex].classList.remove('invader')
+            squares[currentLaserIndex].classList.remove('laser')
+            squares[currentLaserIndex].classList.add('boom')
+            //hacer que el boom desaparesca despues de un momento
+            setTimeout(()=>squares[currentLaserIndex].classList.remove('boom'), 300)
+            clearInterval(laserId)
+            //eliminando al bicho cuando le pega el laser
+            const alienRemoved = alienInvaders.indexOf(currentLaserIndex)
+            aliensRemoved.push(alienRemoved)
+            results++
+            resultsDisplay.innerHTML = results
+        }
 
+    }
+    //Dispara cuando apreto espacio 
+    switch (e.key) {
+        case ' ':
+            laserId = setInterval(moveLaser, 100)    
+        
+    }
+}
 
+//activo el eventListener para que escuche cuando apreto la tecla y dispare
+document.addEventListener('keydown', shoot)
 
 
 

@@ -20,3 +20,11 @@
     background-color: blue;
     border-radius: 5px;
 }
+
+.laser {
+	background-color: orange;
+}
+
+.boom {
+	background-color: red;
+}
