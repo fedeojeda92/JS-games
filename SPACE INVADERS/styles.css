@@ -1,30 +1,71 @@
+/* Fondo y fuente general */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a0a;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #00ffcc;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100vh;
+}
+
+/* Título */
+#results {
+    margin-top: 20px;
+    font-size: 2rem;
+    color: #00ffcc;
+    text-shadow: 0 0 10px #00ffcc;
+}
+
+/* Grid */
 .grid {
     width: 600px;
     height: 600px;
-    border: solid black 1px;
+    border: 2px solid #00ffcc;
     display: flex;
     flex-wrap: wrap;
+    background-color: #1a1a1a;
+    box-shadow: 0 0 20px #00ffcc;
+    margin-top: 20px;
 }
 
+/* Celdas */
 .grid div {
     width: 40px;
     height: 40px;
+    box-sizing: border-box;
 }
 
+/* Invaders */
 .invader {
-    background-color: purple;
-    border-radius: 20px;
+    background: radial-gradient(circle, #ff00ff, #800080);
+    border-radius: 50%;
+    box-shadow: 0 0 10px #ff00ff;
 }
 
+/* Shooter */
 .shooter {
-    background-color: blue;
-    border-radius: 5px;
+    background: radial-gradient(circle, #00bfff, #004080);
+    border-radius: 8px;
+    box-shadow: 0 0 8px #00bfff;
 }
 
+/* Laser */
 .laser {
-	background-color: orange;
+    background-color: #ffcc00;
+    box-shadow: 0 0 6px #ffcc00;
 }
 
+/* Explosión */
 .boom {
-	background-color: red;
+    background-color: red;
+    animation: boomFlash 0.3s ease-out;
+}
+
+@keyframes boomFlash {
+    0% { opacity: 1; }
+    100% { opacity: 0.3; }
 }

@@ -95,11 +95,12 @@ function moveInvaders () {
         clearInterval(invadersID)
     }
 
-    // si toca el piso pierde
+    // Si el invasor toca el piso, fin del juego
     for (let i = 0; i < alienInvaders.length; i++) {
-        if (alienInvaders[i] > squares.length) {
+        if (alienInvaders[i] >= squares.length - width) {
             resultsDisplay.innerHTML = 'GAME OVER'
             clearInterval(invadersID)
+            return
         }
     }
     //si no queda ningun bicho gana
@@ -109,7 +110,7 @@ function moveInvaders () {
     }
 }
 
-invadersID = setInterval(moveInvaders, 5000)
+invadersID = setInterval(moveInvaders, 500)
 
 // dispararle a los bichos
 function shoot(e) {
@@ -119,7 +120,14 @@ function shoot(e) {
     function moveLaser() {
         squares[currentLaserIndex].classList.remove('laser')
         currentLaserIndex -= width
+        // Si se sale del grid (parte superior)
+        if (currentLaserIndex < 0) {
+            clearInterval(laserId)
+            return
+        }
         squares[currentLaserIndex].classList.add('laser')
+        
+        
         //cuando le pega al bicho borro el bicho, el laser y agrego un boom
         if (squares[currentLaserIndex].classList.contains('invader')) {
             squares[currentLaserIndex].classList.remove('invader')
@@ -139,8 +147,7 @@ function shoot(e) {
     //Dispara cuando apreto espacio 
     switch (e.key) {
         case ' ':
-            laserId = setInterval(moveLaser, 100)    
-        
+            laserId = setInterval(moveLaser, 100)
     }
 }
 
